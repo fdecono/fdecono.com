@@ -1,0 +1,287 @@
+/* Sober 8-bit/Pixel Art Styles for fdecono.com */
+
+/* Import pixel font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Sober 8-bit body styling */
+body {
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(135deg, #1a0b2e, #16213e, #0f3460, #1a0b2e);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    color: #e94560;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Sober 8-bit navigation */
+nav {
+    background: rgba(156, 59, 246, 0.8) !important;
+    border: 2px solid #c77dff;
+    box-shadow: 0 0 15px rgba(156, 59, 246, 0.3);
+    position: relative;
+}
+
+nav::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #c77dff, #9d4edd, #c77dff);
+    z-index: -1;
+    animation: borderGlow 4s linear infinite;
+}
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+nav a {
+    color: #fff !important;
+    text-shadow: 1px 1px 0px #c77dff;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: #c77dff !important;
+    text-shadow: 2px 2px 0px #9d4edd, 0 0 8px #c77dff;
+    transform: translateY(-1px);
+}
+
+/* Sober hover text effect */
+.hover-text-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    height: 1.2em;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.hover-text-primary,
+.hover-text-secondary {
+    display: block;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.2em;
+    white-space: nowrap;
+    transform-style: preserve-3d;
+    text-shadow: 2px 2px 0px rgba(156, 59, 246, 0.6);
+}
+
+.hover-text-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%) rotateX(90deg) scale(0.9);
+    opacity: 0;
+    filter: blur(2px);
+}
+
+.hover-text-container:hover .hover-text-primary {
+    transform: translateY(-100%) rotateX(-90deg) scale(1.05);
+    opacity: 0;
+    filter: blur(2px);
+}
+
+.hover-text-container:hover .hover-text-secondary {
+    transform: translateY(0) rotateX(0deg) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+}
+
+.hover-text-container:hover {
+    text-shadow: 0 0 15px rgba(156, 59, 246, 0.6), 0 0 30px rgba(156, 59, 246, 0.4);
+    animation: pixelPulse 0.8s ease-in-out;
+}
+
+@keyframes pixelPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/* Sober 8-bit buttons */
+.btn-primary, a[class*="bg-blue"] {
+    background: linear-gradient(45deg, rgba(156, 59, 246, 0.7), rgba(156, 59, 246, 0.9)) !important;
+    border: 2px solid #c77dff !important;
+    color: #fff !important;
+    text-shadow: 1px 1px 0px #9d4edd;
+    box-shadow: 3px 3px 0px #9d4edd;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+}
+
+.btn-primary:hover, a[class*="bg-blue"]:hover {
+    background: linear-gradient(45deg, #c77dff, #9d4edd) !important;
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0px #9d4edd;
+    text-shadow: 1px 1px 0px #9d4edd, 0 0 8px #c77dff;
+}
+
+/* Sober 8-bit project cards */
+.bg-white {
+    background: rgba(156, 59, 246, 0.08) !important;
+    border: 2px solid #9018eb !important;
+    box-shadow: 4px 4px 0px rgba(156, 59, 246, 0.2) !important;
+    position: relative;
+}
+
+.bg-white::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #b761f8, #8e30db, #bb63ff);
+    z-index: -1;
+    animation: borderGlow 5s linear infinite;
+}
+
+.bg-white:hover {
+    transform: translate(-1px, -1px) !important;
+    box-shadow: 6px 6px 0px rgba(156, 59, 246, 0.3) !important;
+    animation: cardGlow 0.6s ease-in-out;
+}
+
+@keyframes cardGlow {
+    0% { box-shadow: 4px 4px 0px rgba(156, 59, 246, 0.2); }
+    50% { box-shadow: 6px 6px 0px rgba(156, 59, 246, 0.4), 0 0 15px rgba(156, 59, 246, 0.2); }
+    100% { box-shadow: 6px 6px 0px rgba(156, 59, 246, 0.3); }
+}
+
+/* Sober 8-bit tech stack badges */
+.bg-blue-100 {
+    background: #0f3460 !important;
+    border: 1px solid #1c5dac !important;
+    border-radius: 2px;
+    padding: 1px;
+    color: #c77dff !important;
+    text-shadow: 1px 1px 0px #0f3460;
+    box-shadow: 1px 1px 0px #0f3460;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+}
+
+/* Sober 8-bit headings */
+h1, h2, h3 {
+    text-shadow: 2px 2px 0px rgba(156, 59, 246, 0.6);
+    color: #c77dff !important;
+    font-family: 'Press Start 2P', monospace;
+}
+
+h1 {
+    font-size: 2rem;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 2px 2px 0px rgba(156, 59, 246, 0.6); }
+    to { text-shadow: 2px 2px 0px rgba(156, 59, 246, 0.6), 0 0 15px rgba(156, 59, 246, 0.4); }
+}
+
+/* Sober 8-bit text colors */
+.text-gray-600 {
+    color: #c77dff !important;
+    text-shadow: 1px 1px 0px rgba(156, 59, 246, 0.3);
+}
+
+.text-gray-900 {
+    color: #c77dff !important;
+    text-shadow: 1px 1px 0px rgba(156, 59, 246, 0.4);
+}
+
+/* Sober 8-bit links */
+a {
+    color: #c77dff !important;
+    text-shadow: 1px 1px 0px #9d4edd;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #fff !important;
+    text-shadow: 1px 1px 0px #9d4edd, 0 0 8px #c77dff;
+}
+
+/* Sober 8-bit footer */
+footer {
+    background: rgba(156, 59, 246, 0.8) !important;
+    border-top: 2px solid #c77dff !important;
+    box-shadow: 0 -3px 15px rgba(156, 59, 246, 0.3);
+}
+
+/* Sober 8-bit form elements */
+input, textarea {
+    background: rgba(156, 59, 246, 0.1) !important;
+    border: 2px solid #c77dff !important;
+    color: #fff !important;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    text-shadow: 1px 1px 0px #9d4edd;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 0 8px rgba(156, 59, 246, 0.6) !important;
+    border-color: #c77dff !important;
+}
+
+/* Sober 8-bit scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(156, 59, 246, 0.1);
+    border: 1px solid #c77dff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #c77dff, #9d4edd);
+    border: 1px solid #9d4edd;
+    box-shadow: 1px 1px 0px #9d4edd;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #9d4edd, #c77dff);
+}
+
+/* Pixel art animations */
+@keyframes pixelBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.pixel-bounce {
+    animation: pixelBounce 1.5s ease-in-out infinite;
+}
+
+/* Responsive adjustments for sober 8-bit */
+@media (max-width: 640px) {
+    h1 { font-size: 1.2rem; }
+    .btn-primary, a[class*="bg-blue"] { font-size: 0.5rem; }
+    input, textarea { font-size: 0.5rem; }
+}
+
+@media (min-width: 641px) {
+    h1 { font-size: 2.5rem; }
+}
