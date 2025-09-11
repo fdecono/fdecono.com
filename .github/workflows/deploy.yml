@@ -30,14 +30,15 @@ jobs:
         uses: appleboy/scp-action@v0.1.5
         with:
           host: ${{ secrets.LIGHTSAIL_IP }}
-          username: ${{ secrets.LIGHTSAIL_USER }} # e.g., 'fdecono-site'
-          key: ${{ secrets.LIGHTSAIL_SSH_KEY }} # private key
+          username: ${{ secrets.LIGHTSAIL_USER }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           port: 22
           source: |
             fdecono
             internal/templates
             internal/static
           target: /var/lib/fdecono/
+          strip_components: 0
 
       - name: Restart service
         uses: appleboy/ssh-action@v0.1.7
