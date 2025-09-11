@@ -26,6 +26,14 @@ jobs:
           go mod tidy
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o fdecono ./cmd/server/main.go
 
+      - name: Create deployment package
+        run: |
+          mkdir -p deploy
+          cp fdecono deploy/
+          cp -r internal/templates deploy/
+          cp -r internal/static deploy/
+          ls -la deploy/
+
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.5
         with:
@@ -33,12 +41,8 @@ jobs:
           username: ${{ secrets.LIGHTSAIL_USER }}
           key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           port: 22
-          source: |
-            fdecono
-            internal/templates
-            internal/static
+          source: "deploy/*"
           target: /var/lib/fdecono/
-          strip_components: 0
 
       - name: Restart service
         uses: appleboy/ssh-action@v0.1.7
