@@ -36,7 +36,7 @@ jobs:
           source: |
             fdecono
             internal/templates
-            static
+            internal/static
           target: /var/lib/fdecono/
 
       - name: Restart service
