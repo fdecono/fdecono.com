@@ -24,6 +24,11 @@ func main() {
 	// Static files
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("internal/static"))))
 
+	// Favicon route
+	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "internal/static/favicon.ico")
+	})
+
 	// Main routes
 	mux.HandleFunc("/", homeHandler.Home)
 	mux.HandleFunc("/projects", projectsHandler.List)
