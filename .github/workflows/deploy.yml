@@ -1,4 +1,4 @@
-nname: Deploy to Lightsail
+name: Deploy to Lightsail
 
 on:
   push:
