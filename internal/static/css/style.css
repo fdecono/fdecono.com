@@ -83,6 +83,7 @@ nav a:hover {
     white-space: nowrap;
     transform-style: preserve-3d;
     text-shadow: 2px 2px 0px rgba(156, 59, 246, 0.6);
+    text-align: center;
 }
 
 .hover-text-secondary {

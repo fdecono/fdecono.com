@@ -1,6 +1,6 @@
 .git
-.gitignore
-README.md
-Dockerfile
-.dockerignore
+.github
 *.md
+deploy.sh
+fd.html
+.gitignore

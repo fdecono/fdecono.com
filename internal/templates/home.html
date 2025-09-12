@@ -9,7 +9,7 @@
             </span>
         </h1>
         <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto" style="line-height: 2.5;">
-            Software developer passionate about technology, science, and clean code.
+            Software developer passionate about technology and science.
             When I’m not building systems, I’m on the football pitch, padel court, or ski slopes.
             Lover of dogs, fantasy worlds, and gaming adventures.
         </p>
@@ -34,13 +34,13 @@
                     </div>
                     <br>
                     <div class="flex gap-2">
-                        <a href="/projects/{{.ID}}"
+                        <!-- <a href="/projects/{{.ID}}"
                            class="text-blue-600 hover:text-blue-800 transition-colors"
                            hx-get="/projects/{{.ID}}"
                            hx-target="#project-detail"
                            hx-swap="innerHTML">
                             View Details
-                        </a>
+                        </a> -->
                         {{if .GitHubURL}}
                         <a href="{{.GitHubURL}}" target="_blank" class="text-gray-600 hover:text-gray-800 transition-colors">
                             GitHub
