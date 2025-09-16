@@ -38,6 +38,16 @@ func GetProjects() []Project {
 			CreatedAt:   time.Date(2024, 1, 10, 0, 0, 0, 0, time.UTC),
 			Featured:    true,
 		},
+		{
+			ID:          "my-bit-torrent",
+			Title:       "MyBitTorrent (WIP)",
+			Description: "A BitTorrent client built with Go",
+			LongDesc:    "A BitTorrent client built with Go. It can download and upload files to the BitTorrent network.",
+			GitHubURL:   "https://github.com/fdecono/my-bit-torrent",
+			TechStack:   []string{"Go", "p2p", "bittorrent"},
+			CreatedAt:   time.Date(2024, 1, 10, 0, 0, 0, 0, time.UTC),
+			Featured:    true,
+		},
 	}
 }
 

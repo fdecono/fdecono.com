@@ -6,8 +6,6 @@ A modern personal website built with Go and htmx, featuring a clean design and p
 
 - **Homepage**: Personal bio and featured projects showcase
 - **Projects Section**: Dynamic project listings with individual detail pages
-- **Project Details**: Individual project pages with full descriptions and tech stacks
-- **Contact Form**: Interactive contact form with htmx validation
 - **Responsive Design**: Mobile-first design with custom CSS
 - **Progressive Enhancement**: Works without JavaScript, enhanced with htmx
 - **Health Check**: Built-in health check endpoint for monitoring
@@ -42,9 +40,7 @@ fdecono.com/
 │   │   ├── base.html           # Base template with common layout
 │   │   ├── home.html           # Homepage template
 │   │   ├── projects.html       # Projects listing template
-│   │   ├── project-detail.html # Individual project template
-│   │   ├── contact.html        # Contact page template
-│   │   └── contact-form.html   # Contact form partial template
+│   │   └── project-detail.html # Individual project template
 │   └── static/                  # Static assets
 │       ├── css/
 │       │   └── style.css       # Custom styles
@@ -58,8 +54,6 @@ fdecono.com/
 ├── go.sum                       # Go module checksums
 ├── Dockerfile                   # Docker configuration
 ├── docker-compose.yml           # Docker Compose configuration
-├── deploy.sh                    # Legacy deployment script
-├── fd.html                      # Resume page
 └── README.md
 ```
 
@@ -277,33 +271,6 @@ Transfer time:      ~30 seconds
 Deployment time:    ~2 minutes total
 ```
 
-### Automated Deployment with GitHub Actions
-
-The process is automated via GitHub Actions:
-
-```yaml
-# .github/workflows/deploy.yml
-- name: Build Docker image
-  run: |
-    docker buildx build --platform linux/amd64 -t fdecono.com:${{ github.sha }} . --load
-    docker save fdecono.com:${{ github.sha }} | gzip > fdecono.com.tar.gz
-
-- name: Copy to server
-  uses: appleboy/scp-action@v0.1.5
-  with:
-    source: "fdecono.com.tar.gz"
-    target: /home/ubuntu/
-
-- name: Deploy on server
-  uses: appleboy/ssh-action@v0.1.7
-  with:
-    script: |
-      docker load < fdecono.com.tar.gz
-      docker stop fdecono.com || true
-      docker rm fdecono.com || true
-      docker run -d --name fdecono.com -p 8080:8080 --restart unless-stopped fdecono.com:${{ github.sha }}
-```
-
 ### Resume Subdomain
 
 The project also includes a separate resume page:
@@ -362,9 +329,6 @@ docker-compose up -d --build
 
 - `GET /` - Homepage with featured projects
 - `GET /projects` - Projects listing page
-- `GET /projects/{id}` - Individual project detail page
-- `GET /contact` - Contact form page
-- `POST /contact/submit` - Contact form submission
 - `GET /health` - Health check endpoint
 - `GET /static/*` - Static file serving
 - `GET /favicon.ico` - Favicon
@@ -477,37 +441,3 @@ docker-compose up -d --build
 - **Logging**: Built-in logging for server events and errors
 - **Health Checks**: Built-in health check endpoint for monitoring
 - **Docker Support**: Full containerization with multi-stage builds
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test your changes locally with Docker
-5. Commit your changes (`git commit -m 'Add some amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Contact
-
-For questions or suggestions, please open an issue or contact me through the website's contact form.
-
----
-
-## Deployment Summary
-
-This project successfully migrated from a traditional deployment to a modern Docker-based deployment with the following benefits:
-
-- **Consistency**: Same environment everywhere
-- **Isolation**: Application runs in its own container
-- **Easy rollbacks**: Just switch container versions
-- **Simplified deployment**: One command to deploy
-- **No permission issues**: Everything runs inside container
-- **Scalability**: Easy to scale horizontally
-- **Automation**: GitHub Actions for automated deployments
-
-The deployment process handles architecture compatibility, static file serving, SSL termination, and automated updates through a complete CI/CD pipeline.
