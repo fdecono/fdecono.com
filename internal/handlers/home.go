@@ -31,7 +31,7 @@ func (h *HomeHandler) Home(w http.ResponseWriter, r *http.Request) {
 		Projects []models.Project
 	}{
 		Title:    "Federico Decono",
-		Projects: h.projects[:3], // Show only first 3 projects on home
+		Projects: h.projects,
 	}
 
 	w.Header().Set("Content-Type", "text/html")

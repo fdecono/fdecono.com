@@ -1,9 +1,11 @@
+# Use official Go image as base
 FROM golang:1.21-alpine AS builder
 
+# Set working directory
 WORKDIR /app
 
-# Copy go mod files
-COPY go.mod go.sum ./
+# Copy go mod files first (for better caching)
+COPY go.mod ./
 
 # Download dependencies
 RUN go mod download
@@ -11,22 +13,33 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main cmd/server/main.go
+# Build the application with memory optimizations
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o main ./cmd/server/main.go
 
-# Final stage
+# Final stage - minimal image
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates tzdata
+# Install ca-certificates for HTTPS requests
+RUN apk --no-cache add ca-certificates
 
-WORKDIR /root/
+# Create non-root user for security
+RUN adduser -D -s /bin/sh appuser
 
-# Copy the binary
+# Set working directory
+WORKDIR /app
+
+# Copy binary from builder stage
 COPY --from=builder /app/main .
 
-# Copy templates and static files
-COPY --from=builder /app/internal/templates ./internal/templates
+# Copy static files
 COPY --from=builder /app/internal/static ./internal/static
+COPY --from=builder /app/internal/templates ./internal/templates
+
+# Change ownership to non-root user
+RUN chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
 
 # Expose port
 EXPOSE 8080
