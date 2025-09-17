@@ -16,7 +16,6 @@ func main() {
 	// Create handlers
 	homeHandler := handlers.NewHomeHandler(projects)
 	projectsHandler := handlers.NewProjectsHandler(projects)
-	contactHandler := handlers.NewContactHandler()
 
 	// Setup routes
 	mux := http.NewServeMux()
@@ -33,8 +32,6 @@ func main() {
 	mux.HandleFunc("/", homeHandler.Home)
 	mux.HandleFunc("/projects", projectsHandler.List)
 	mux.HandleFunc("/projects/", projectsHandler.Detail)
-	mux.HandleFunc("/contact", contactHandler.Contact)
-	mux.HandleFunc("/contact/submit", contactHandler.Submit)
 
 	// Health check
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
